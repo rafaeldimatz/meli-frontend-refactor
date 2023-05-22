@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react'
-import {Link, useSearchParams} from 'react-router-dom'
+import React, { useState,useEffect, useContext } from 'react'
+import {Link} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 
 import formatPrice from '../../util/utility'
@@ -9,13 +9,16 @@ import iProduct from '../../interfaces/Producto'
 import NotProductFound from '../notproducts'
 import BreadCrumb  from '../breadcrumb'
 import ErrorPage from '../errorpage'
+import SearchWordContext from '../context/SearchContext'
 
 const ProductList: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchWord = searchParams.get("search");
+  //const [searchParams, setSearchParams] = useSearchParams();
+  //const searchWord = searchParams.get("search");
   const [loading, setloading] = useState<boolean>(true);
   const [errorApi, seterrorApi] = useState<string>('');
   const [productList, setproductList] = useState<iProduct | null>();
+
+  const {searchWord} = useContext(SearchWordContext);
   useEffect(() => {
     const dataFech = async()=>{
     try{

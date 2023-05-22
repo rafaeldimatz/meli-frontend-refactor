@@ -1,18 +1,21 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React,{useEffect,useRef,useContext} from 'react'
 import {useLocation, useNavigate } from "react-router-dom"
 import {RiSearchLine} from 'react-icons/ri'
 
 import './Search.scss'
 import logo from '../../assets/Logo_ML.png'
 import { Helmet } from 'react-helmet'
+import SearchWordContext from '../context/SearchContext'
 
 interface Props {}
 
 const Search : React.FC<Props> = () => {
   const navigation = useNavigate();
   const location = useLocation();
-  const [searchWord, setsearchWord] = useState<string>('')
+  //const [searchWord, setsearchWord] = useState<string>('')
   const inputName = useRef<HTMLInputElement>(null);
+  const {searchWord,setsearchWord} = useContext(SearchWordContext);
+
   const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
     setsearchWord(e.target.value)
   }
